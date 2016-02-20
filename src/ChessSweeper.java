@@ -6,7 +6,8 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
 
-public class UserPanel extends JPanel implements ActionListener, MouseMotionListener{
+public class ChessSweeper extends JPanel implements ActionListener, MouseMotionListener{
+
     public void actionPerformed(ActionEvent e){
 
     }
@@ -16,4 +17,5 @@ public class UserPanel extends JPanel implements ActionListener, MouseMotionList
     public void mouseMoved(MouseEvent e){
 
     }
+
 }
