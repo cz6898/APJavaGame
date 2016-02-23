@@ -3,7 +3,7 @@
  */
 public class Board{
     private Tile[][] board;
-    private final int WIDTH = 10;
+    public final int WIDTH = 10;
     private int length, numMines;
     public Board(int l, int n){
         length = l;
@@ -71,12 +71,18 @@ public class Board{
                 if(board[w][l].getMine()){
                     rVal += "x ";
                 }
+                else if(board[w][l].getHasPiece()){
+                    rVal += "Q ";
+                }
                 else{
-                    rVal += board[w][l].getBorderMines() +" ";
+                    rVal += board[w][l].getBorderMines() + " ";
                 }
             }
             rVal += "\n";
         }
         return rVal;
+    }
+    public Tile[][] getBoard(){
+        return board;
     }
 }
