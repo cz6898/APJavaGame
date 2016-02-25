@@ -18,7 +18,7 @@ public class UserPanel extends JPanel implements JavaArcade, ActionListener {
     private Board board;
     private javax.swing.Timer blitzTimer;
     private int turnNumber;
-    private boolean started, paused;
+    private boolean started, paused, turn;
     private ChessBoard chessBoard;
     public UserPanel(){
         board = new Board(16, 40);
@@ -43,7 +43,11 @@ public class UserPanel extends JPanel implements JavaArcade, ActionListener {
     }
     public void startGame(){
         started = true;
+        turn = true;
         blitzTimer = new Timer(5000, this);
+        while(started){
+            turn = (turnNumber % 2 == 0);
+        }
     }
     public void endGame(){
         started = false;
@@ -59,6 +63,8 @@ public class UserPanel extends JPanel implements JavaArcade, ActionListener {
     }
     public void actionPerformed(ActionEvent e){
         turnNumber++;
+        chessBoard.redrawChessBoard();
+        blitzTimer.restart();
     }
 }
 

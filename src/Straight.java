@@ -1,7 +1,7 @@
 /**
  * Created by Chris on 2/23/2016.
  */
-public class Straight{
+public interface Straight{
     public static boolean move(Piece p, Tile[][] t, int x2, int y2) {
         int x = p.getX();
         int y = p.getY();
