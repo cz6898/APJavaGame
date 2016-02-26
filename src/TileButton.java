@@ -6,21 +6,21 @@ import java.awt.event.ActionListener;
  * Created by Chairman Zhao on 2/24/2016.
  */
 public class TileButton extends JButton implements ActionListener {
-    private JButton button;
     private Tile tile;
-    private ChessBoard chess;
-    public TileButton(Tile t, ChessBoard c){
+    public TileButton(Tile t){
         tile = t;
-        button = new JButton();
-        ChessBoard chess = c;
-        button.addActionListener(this);
+        this.addActionListener(this);
     }
     public void actionPerformed(ActionEvent e){
-        chess.setSelected(tile);
-        if(chess.getCount() == 0)
-            chess.setCount(1);
+        if(!UserPanel.chessBoard.getChosen()){
+            if(tile.getHasPiece() && UserPanel.chessBoard.getUserPanel().getTurn() == tile.getPiece().getColor()){
+                UserPanel.chessBoard.setSelected(tile);
+            }
+            UserPanel.chessBoard.setChosen(true);
+        }
         else{
-            chess.getSelected(0).getPiece().move(chess.getSelected(1).getX(), chess.getSelected(1).getY());
+            UserPanel.chessBoard.setSuccessful(UserPanel.chessBoard.getSelected().getPiece().move(tile.getX(), tile.getY()));
+            UserPanel.chessBoard.setChosen(false);
         }
     }
 }

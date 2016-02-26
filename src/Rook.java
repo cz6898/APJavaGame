@@ -9,8 +9,8 @@ public class Rook extends Piece{
         return "Rook";
     }
     public boolean move(int x2, int y2){
-        if(!movementChecks(t, x2, y2))
+        if(!movementChecks(x2, y2))
             return false;
-        return Straight.move(this, t, x2, y2);
+        return Straight.move(this, x2, y2);
     }
 }

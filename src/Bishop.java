@@ -9,8 +9,9 @@ public class Bishop extends Piece{
         return "Bishop";
     }
     public boolean move(int x2, int y2){
-        if(!movementChecks(t, x2, y2))
+        Tile[][] t = UserPanel.board.getBoard();
+        if(!movementChecks(x2, y2))
             return false;
-        return Diagonal.move(this, t, x2, y2);
+        return Diagonal.move(this, x2, y2);
     }
 }

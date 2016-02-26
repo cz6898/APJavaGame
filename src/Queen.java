@@ -9,12 +9,12 @@ public class Queen extends Piece{
         return "Queen";
     }
     public boolean move(int x2, int y2){
-        if(!movementChecks(t, x2, y2))
+        if(!movementChecks(x2, y2))
             return false;
         //boolean rVal = false;
-        if(Diagonal.move(this, t, x2, y2))
+        if(Diagonal.move(this, x2, y2))
             return true;
-        if(Straight.move(this, t, x2, y2))
+        if(Straight.move(this, x2, y2))
             return true;
         return false;
     }

@@ -14,21 +14,23 @@ import javax.imageio.ImageIO;
  * Created by Chris on 2/23/2016.
  */
 public class UserPanel extends JPanel implements JavaArcade, ActionListener {
-    private Team white, black;
-    private Board board;
+    public static Board board;
     private javax.swing.Timer blitzTimer;
     private int turnNumber;
     private boolean started, paused, turn;
-    private ChessBoard chessBoard;
+    public static ChessBoard chessBoard;
+    public static Team white, black;
     public UserPanel(){
         board = new Board(16, 40);
-        white = new Team(true, board);
-        black = new Team(false, board);
+        white = new Team(true);
+        black = new Team(false);
         this.setLayout(new GridLayout(1, 2));
         started = false;
         paused = false;
         turnNumber = 0;
-        chessBoard = new ChessBoard(board);
+        chessBoard = new ChessBoard(this);
+        chessBoard.redrawChessBoard();
+        this.add(chessBoard);
     }
     public String getGameName(){
         return "ChesSweeper";
@@ -44,9 +46,16 @@ public class UserPanel extends JPanel implements JavaArcade, ActionListener {
     public void startGame(){
         started = true;
         turn = true;
-        blitzTimer = new Timer(5000, this);
+        redraw();
+        //blitzTimer = new Timer(10000, this);
         while(started){
-            turn = (turnNumber % 2 == 0);
+            if(chessBoard.getSuccessful()){
+                turnNumber++;
+                turn = turnNumber % 2 == 0;
+                redraw();
+                blitzTimer.restart();
+                chessBoard.setSuccessful(false);
+            }
         }
     }
     public void endGame(){
@@ -63,8 +72,20 @@ public class UserPanel extends JPanel implements JavaArcade, ActionListener {
     }
     public void actionPerformed(ActionEvent e){
         turnNumber++;
-        chessBoard.redrawChessBoard();
+        redraw();
         blitzTimer.restart();
     }
+    public boolean getTurn(){
+        return turn;
+    }
+    public void redraw(){
+        chessBoard.redrawChessBoard();
+        this.remove(chessBoard);
+        this.add(chessBoard);
+    }
+    public Board getBoard(){
+        return board;
+    }
+
 }
 

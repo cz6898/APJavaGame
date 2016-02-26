@@ -8,7 +8,7 @@ public class Tester {
     public static void main(String[] args){
         //Tests board to ensure random assignment of mines:
         Scanner scan = new Scanner(System.in);
-        Board testBoard = new Board(12, 20);
+       // Board testBoard = new Board(12, 20);
         /*testBoard.setNumbers();
         testBoard.getTile(5, 0).setPiece(new Queen(true, 5, 0));
         testBoard.getTile(5, 0).setHasPiece(true);
@@ -21,12 +21,12 @@ public class Tester {
         testBoard.setNumbers();
         System.out.println(testBoard);*/
         //Tests team to ensure pieces are made
-        Team white = new Team(true, testBoard);
-        Team black = new Team(false, testBoard);
-        white.printPieces();
-        testBoard.setNumbers();
-        testBoard.discover();
-        System.out.println();
-        System.out.println(testBoard);
+        UserPanel u = new UserPanel();
+        u.getBoard().setNumbers();
+        u.getBoard().discover();
+        System.out.println(u.getBoard());
+        System.out.println(u.getBoard().getTile(4, 0).getPiece().move(4, 1));
+        u.getBoard().setNumbers();
+        System.out.println(u.getBoard());
     }
 }
